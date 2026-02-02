@@ -27,7 +27,7 @@ git commit -m "$COMMIT_MSG" || exit 0
 # 推送到远程（如果有）
 if git remote get-url origin >/dev/null 2>&1; then
     git push origin master 2>&1
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - 已推送到 GitHub"
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - 已推送到 GitHub: https://github.com/fanzam0501-pixel/Fanzam"
 else
     echo "$(date '+%Y-%m-%d %H:%M:%S') - 已本地提交，但未配置远程仓库"
 fi
