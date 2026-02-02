@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扔纸飞机 ✈️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+            touch-action: none;
+        }
+        
+        #gameCanvas {
+            display: block;
+            background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 50%, #90EE90 50%, #228B22 100%);
+        }
+        
+        #ui {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        #ui .stat {
+            margin: 3px 0;
+        }
+        
+        #ui .label {
+            color: #666;
+        }
+        
+        #ui .value {
+            color: #2196F3;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        #wind {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        #tip {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div id="ui">
+        <div class="stat"><span class="label">最佳距离:</span> <span class="value" id="best">0m</span></div>
+        <div class="stat"><span class="label">本次飞行:</span> <span class="value" id="dist">0m</span></div>
+        <div class="stat"><span class="label">飞行次数:</span> <span class="value" id="count">0</span></div>
+    </div>
+    
+    <div id="wind">💨</div>
+    <div id="tip">🖱️ 拖拽纸飞机发射</div>
+    
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 设置画布
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+        
+        // 游戏数据
+        let best = 0, count = 0;
+        let wind = (Math.random() - 0.5) * 0.3;
+        
+        // 纸飞机
+        const plane = {
+            x: 80, y: canvas.height / 2,
+            vx: 0, vy: 0, angle: 0,
+            flying: false, landed: false,
+            trail: []
+        };
+        
+        // 拖拽
+        let dragging = false, dragFrom = null;
+        
+        // 地面高度
+        const ground = canvas.height * 0.55;
+        
+        // 云朵
+        const clouds = Array(4).fill(0).map(() => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * ground * 0.4,
+            size: 30 + Math.random() * 40,
+            speed: 0.1 + Math.random() * 0.2
+        }));
+        
+        // 获取输入位置
+        function getPos(e) {
+            return e.touches ? { x: e.touches[0].clientX, y: e.touches[0].clientY } 
+                            : { x: e.clientX, y: e.clientY };
+        }
+        
+        // 绘制飞机
+        function drawPlane(x, y, angle) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            
+            // 飞机形状
+            ctx.fillStyle = '#fff';
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 1.5;
+            
+            ctx.beginPath();
+            ctx.moveTo(20, 0);
+            ctx.lineTo(-12, -10);
+            ctx.lineTo(-8, 0);
+            ctx.lineTo(-12, 10);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+            
+            // 折痕
+            ctx.strokeStyle = '#ccc';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(12, 0);
+            ctx.lineTo(-8, -6);
+            ctx.moveTo(12, 0);
+            ctx.lineTo(-8, 6);
+            ctx.stroke();
+            
+            ctx.restore();
+        }
+        
+        // 绘制云朵
+        function drawCloud(c) {
+            ctx.fillStyle = 'rgba(255,255,255,0.85)';
+            ctx.beginPath();
+            ctx.arc(c.x, c.y, c.size * 0.4, 0, Math.PI * 2);
+            ctx.arc(c.x + c.size * 0.25, c.y - c.size * 0.15, c.size * 0.35, 0, Math.PI * 2);
+            ctx.arc(c.x + c.size * 0.4, c.y, c.size * 0.3, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        // 绘制
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 相机偏移
+            let camX = 0;
+            if (plane.flying || plane.landed) {
+                camX = Math.max(0, plane.x - 150);
+            }
+            
+            ctx.save();
+            ctx.translate(-camX, 0);
+            
+            // 云朵
+            clouds.forEach(c => {
+                drawCloud(c);
+                c.x += c.speed + wind;
+                if (c.x > camX + canvas.width + 100) c.x = camX - 100;
+            });
+            
+            // 地面
+            ctx.fillStyle = '#228B22';
+            ctx.fillRect(camX, ground, canvas.width, canvas.height - ground);
+            
+            // 草地
+            ctx.strokeStyle = '#1a6b1a';
+            ctx.lineWidth = 1.5;
+            for (let i = camX; i < camX + canvas.width; i += 15) {
+                ctx.beginPath();
+                ctx.moveTo(i, ground);
+                ctx.lineTo(i + 2, ground - 4 - Math.sin(i * 0.1) * 2);
+                ctx.stroke();
+            }
+            
+            // 距离标记
+            ctx.fillStyle = '#666';
+            ctx.font = '11px sans-serif';
+            for (let m = 0; m <= 2000; m += 100) {
+                const mx = 80 + m * 2;
+                if (mx >= camX - 30 && mx <= camX + canvas.width + 30) {
+                    ctx.fillRect(mx, ground - 10, 1, 10);
+                    ctx.fillText(m + 'm', mx - 12, ground + 15);
+                }
+            }
+            
+            // 轨迹
+            if (plane.trail.length > 1) {
+                ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(plane.trail[0].x, plane.trail[0].y);
+                for (let i = 1; i < plane.trail.length; i++) {
+                    ctx.lineTo(plane.trail[i].x, plane.trail[i].y);
+                }
+                ctx.stroke();
+            }
+            
+            // 拖拽线
+            if (dragging && dragFrom) {
+                ctx.strokeStyle = 'rgba(255,100,100,0.6)';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([8, 4]);
+                ctx.beginPath();
+                ctx.moveTo(plane.x, plane.y);
+                ctx.lineTo(dragFrom.x + camX, dragFrom.y);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                
+                // 力度
+                const dx = plane.x - (dragFrom.x + camX);
+                const dy = plane.y - dragFrom.y;
+                const p = Math.min(Math.sqrt(dx*dx + dy*dy) / 150, 1);
+                ctx.fillStyle = `hsl(${120-p*120}, 100%, 45%)`;
+                ctx.font = 'bold 14px sans-serif';
+                ctx.fillText(Math.floor(p*100) + '%', plane.x + 25, plane.y - 15);
+            }
+            
+            // 飞机
+            drawPlane(plane.x, plane.y, plane.angle);
+            
+            // 落点
+            if (plane.landed) {
+                ctx.fillStyle = '#FFD700';
+                ctx.beginPath();
+                ctx.arc(plane.x, ground, 8, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            ctx.restore();
+        }
+        
+        // 更新
+        function update() {
+            if (plane.flying) {
+                plane.x += plane.vx;
+                plane.y += plane.vy;
+                plane.vy += 0.12;
+                plane.vx *= 0.996;
+                plane.vy *= 0.996;
+                plane.vx += wind * 0.08;
+                plane.angle = Math.atan2(plane.vy, plane.vx);
+                
+                // 轨迹
+                if (!plane.trail.length || 
+                    Math.hypot(plane.x - plane.trail[plane.trail.length-1].x, 
+                              plane.y - plane.trail[plane.trail.length-1].y) > 8) {
+                    plane.trail.push({x: plane.x, y: plane.y});
+                }
+                
+                // 落地
+                if (plane.y >= ground) {
+                    plane.y = ground;
+                    plane.landed = true;
+                    plane.flying = false;
+                    
+                    const dist = Math.max(0, Math.floor((plane.x - 80) / 2));
+                    document.getElementById('dist').textContent = dist + 'm';
+                    if (dist > best) {
+                        best = dist;
+                        document.getElementById('best').textContent = best + 'm';
+                    }
+                    document.getElementById('tip').textContent = '📍 点击任意处再飞一次';
+                    
+                    setTimeout(reset, 2000);
+                }
+                
+                // 出界
+                if (plane.y > canvas.height + 50 || plane.x < -50) {
+                    reset();
+                }
+            }
+        }
+        
+        // 重置
+        function reset() {
+            plane.x = 80;
+            plane.y = canvas.height / 2;
+            plane.vx = plane.vy = 0;
+            plane.angle = 0;
+            plane.flying = false;
+            plane.landed = false;
+            plane.trail = [];
+            wind = (Math.random() - 0.5) * 0.4;
+            document.getElementById('wind').style.transform = `rotate(${wind*300}deg)`;
+            document.getElementById('tip').textContent = '🖱️ 拖拽纸飞机发射';
+        }
+        
+        // 事件
+        canvas.addEventListener('mousedown', e => {
+            if (plane.flying || plane.landed) return;
+            const p = getPos(e);
+            if (Math.hypot(p.x - plane.x, p.y - plane.y) < 50) {
+                dragging = true;
+                dragFrom = p;
+            }
+        });
+        
+        canvas.addEventListener('mousemove', e => {
+            if (dragging) dragFrom = getPos(e);
+        });
+        
+        canvas.addEventListener('mouseup', e => {
+            if (!dragging) {
+                if (plane.landed) reset();
+                return;
+            }
+            dragging = false;
+            
+            const p = getPos(e);
+            const dx = plane.x - p.x;
+            const dy = plane.y - p.y;
+            const power = Math.sqrt(dx*dx + dy*dy);
+            
+            if (power > 15) {
+                const s = Math.min(power, 180) / 20;
+                plane.vx = (dx / power) * s * 6;
+                plane.vy = (dy / power) * s * 6;
+                plane.flying = true;
+                count++;
+                document.getElementById('count').textContent = count;
+                document.getElementById('tip').textContent = '✈️ 飞行中...';
+            }
+        });
+        
+        // 触摸支持
+        canvas.addEventListener('touchstart', e => {
+            if (plane.flying || plane.landed) return;
+            const p = getPos(e);
+            if (Math.hypot(p.x - plane.x, p.y - plane.y) < 50) {
+                dragging = true;
+                dragFrom = p;
+            }
+        }, {passive: false});
+        
+        canvas.addEventListener('touchmove', e => {
+            if (dragging) {
+                e.preventDefault();
+                dragFrom = getPos(e);
+            }
+        }, {passive: false});
+        
+        canvas.addEventListener('touchend', e => {
+            if (!dragging) {
+                if (plane.landed) reset();
+                return;
+            }
+            dragging = false;
+            
+            const p = getPos(e.changedTouches[0]);
+            const dx = plane.x - p.x;
+            const dy = plane.y - p.y;
+            const power = Math.sqrt(dx*dx + dy*dy);
+            
+            if (power > 15) {
+                const s = Math.min(power, 180) / 20;
+                plane.vx = (dx / power) * s * 6;
+                plane.vy = (dy / power) * s * 6;
+                plane.flying = true;
+                count++;
+                document.getElementById('count').textContent = count;
+                document.getElementById('tip').textContent = '✈️ 飞行中...';
+            }
+        });
+        
+        // 循环
+        function loop() {
+            update();
+            draw();
+            requestAnimationFrame(loop);
+        }
+        loop();
+    </script>
+</body>
+</html>
