@@ -1,0 +1,85 @@
+{
+  "monitoring": {
+    "enabled": true,
+    "check_interval": "5min",
+    "market_hours_only": true
+  },
+  "watchlist": [
+    {
+      "code": "sh000001",
+      "name": "上证指数",
+      "strategy": "大盘风向",
+      "alerts": {
+        "change_pct_above": 2,
+        "change_pct_below": -3
+      }
+    },
+    {
+      "code": "sh600519",
+      "name": "贵州茅台",
+      "strategy": "趋势跟踪",
+      "alerts": {
+        "price_above": 1800,
+        "price_below": 1700,
+        "change_pct_above": 5,
+        "change_pct_below": -5
+      }
+    },
+    {
+      "code": "sz300750",
+      "name": "宁德时代",
+      "strategy": "短线突破",
+      "alerts": {
+        "price_above": 220,
+        "price_below": 200,
+        "change_pct_above": 7,
+        "change_pct_below": -7
+      }
+    },
+    {
+      "code": "hkHSI",
+      "name": "恒生指数",
+      "strategy": "港股大盘",
+      "alerts": {
+        "change_pct_above": 2,
+        "change_pct_below": -3
+      }
+    },
+    {
+      "code": "hk00700",
+      "name": "腾讯控股",
+      "strategy": "科技龙头",
+      "alerts": {
+        "price_above": 400,
+        "price_below": 350,
+        "change_pct_above": 5,
+        "change_pct_below": -5
+      }
+    },
+    {
+      "code": "hk09988",
+      "name": "阿里巴巴",
+      "strategy": "中概互联",
+      "alerts": {
+        "price_above": 100,
+        "price_below": 85,
+        "change_pct_above": 5,
+        "change_pct_below": -5
+      }
+    }
+  ],
+  "short_term_strategy": {
+    "max_positions": 3,
+    "single_position_limit": 0.2,
+    "stop_loss": -0.05,
+    "take_profit": 0.08,
+    "holding_period": "1-3天"
+  },
+  "alert_channels": ["message"],
+  "user_info": {
+    "name": "方逸灿",
+    "timezone": "Asia/Shanghai",
+    "markets": ["A股", "港股"],
+    "holdings": []
+  }
+}
