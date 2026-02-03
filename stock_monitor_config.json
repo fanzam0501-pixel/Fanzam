@@ -1,6 +1,6 @@
 {
   "monitoring": {
-    "enabled": true,
+    "enabled": false,
     "check_interval": "5min",
     "market_hours_only": true
   },
