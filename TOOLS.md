@@ -23,8 +23,9 @@ Things like:
 - home-server → 192.168.1.100, user: admin
 
 ### TTS
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
+- **声音偏好:** 女声
+- 风格: 待确认（沉稳知性 / 活泼亲切 / 温柔舒缓？）
+- 具体音色: 待接入 ElevenLabs 后挑选
 ```
 
 ## Why Separate?
