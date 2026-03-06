@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "skills": {
+    "tavily-search": {
+      "name": "Tavily Web Search",
+      "zip_url": "https://skillhub-1251783334.cos.ap-guangzhou.myqcloud.com/skills/tavily-search.zip",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "summarize": {
+      "name": "Summarize",
+      "zip_url": "https://skillhub-1251783334.cos.ap-guangzhou.myqcloud.com/skills/summarize.zip",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "agent-browser": {
+      "name": "Agent Browser",
+      "zip_url": "https://skillhub-1251783334.cos.ap-guangzhou.myqcloud.com/skills/agent-browser.zip",
+      "source": "skillhub",
+      "version": "0.2.0"
+    },
+    "find-skills": {
+      "name": "Find Skills",
+      "zip_url": "https://skillhub-1251783334.cos.ap-guangzhou.myqcloud.com/skills/find-skills.zip",
+      "source": "skillhub",
+      "version": "0.1.0"
+    },
+    "github": {
+      "name": "Github",
+      "zip_url": "https://skillhub-1251783334.cos.ap-guangzhou.myqcloud.com/skills/github.zip",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "obsidian": {
+      "name": "Obsidian",
+      "zip_url": "https://skillhub-1251783334.cos.ap-guangzhou.myqcloud.com/skills/obsidian.zip",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "notion": {
+      "name": "Notion",
+      "zip_url": "https://skillhub-1251783334.cos.ap-guangzhou.myqcloud.com/skills/notion.zip",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "weather": {
+      "name": "Weather",
+      "zip_url": "https://skillhub-1251783334.cos.ap-guangzhou.myqcloud.com/skills/weather.zip",
+      "source": "skillhub",
+      "version": "1.0.0"
+    },
+    "nano-pdf": {
+      "name": "Nano Pdf",
+      "zip_url": "https://skillhub-1251783334.cos.ap-guangzhou.myqcloud.com/skills/nano-pdf.zip",
+      "source": "skillhub",
+      "version": "1.0.0"
+    }
+  }
+}

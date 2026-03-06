@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "skills": {
+    "tencentcloud-lighthouse-skill": {
+      "version": "1.0.0",
+      "installedAt": 1772760839400
+    },
+    "tencent-docs": {
+      "version": "1.0.3",
+      "installedAt": 1772760841278
+    },
+    "nano-pdf": {
+      "version": "1.0.0",
+      "installedAt": 1772761410221
+    },
+    "summarize": {
+      "version": "1.0.0",
+      "installedAt": 1772761451676
+    }
+  }
+}
