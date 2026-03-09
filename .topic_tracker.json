@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "current_session_topics": [
+    "系统管理",
+    "项目管理",
+    "编程",
+    "股票",
+    "文本创作"
+  ],
+  "all_detected_topics": [
+    "系统管理",
+    "项目管理",
+    "编程",
+    "股票",
+    "文本创作"
+  ],
+  "last_checked_file": "",
+  "last_checked_time": 1773022019,
+  "topic_count": 5,
+  "threshold": 10,
+  "last_reset_time": 0
+}
