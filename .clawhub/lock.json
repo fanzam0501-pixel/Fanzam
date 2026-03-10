@@ -15,7 +15,31 @@
     },
     "summarize": {
       "version": "1.0.0",
-      "installedAt": 1772761451676
+      "installedAt": 1773128696156
+    },
+    "tavily-search": {
+      "version": "1.0.0",
+      "installedAt": 1773128693832
+    },
+    "agent-browser": {
+      "version": "0.2.0",
+      "installedAt": 1773128697426
+    },
+    "find-skills": {
+      "version": "0.1.0",
+      "installedAt": 1773128700609
+    },
+    "github": {
+      "version": "1.0.0",
+      "installedAt": 1773128702348
+    },
+    "obsidian": {
+      "version": "1.0.0",
+      "installedAt": 1773128703738
+    },
+    "weather": {
+      "version": "1.0.0",
+      "installedAt": 1773128705015
     }
   }
 }
