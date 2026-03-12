@@ -2,16 +2,46 @@
 
 *Learn about the person you're helping. Update this as you go.*
 
-- **Name:** 
-- **What to call them:** 
-- **Pronouns:** *(optional)*
-- **Timezone:** 
-- **Notes:** 
+- **Name:** 方逸灿
+- **What to call them:** 方逸灿 / 你定
+- **Pronouns:** -
+- **Timezone:** 东八区 (Asia/Shanghai)
+- **Location:** 佛山顺德，Base广佛
 
 ## Context
 
-*(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)*
+**职业背景**
+- 品牌运营 / 文案策划 / 小红书运营
+- 近3年任职姬路科技（佛山），负责Himeji倾厨品牌
+- 擅长：内容运营、投放、商务合作、店铺运营
+
+**核心技能**
+- 小红书：0到2万粉实操经验，月销3万+店铺运营
+- 文案策划：商详页、主图、品牌物料
+- 平面设计：PS/AI，能独立完成视觉物料
+- 剪辑：Pr、剪映
+- 多平台：公众号、微博、抖音、视频号
+
+**当前状态（2026-03-12更新）**
+- 已提交辞职信，最后工作日：2026年3月31日
+- 正在求职中，意向：小红书运营 / 品牌推广
+- 可接受广佛地区及短途出差
+- 到岗时间：提前1-2周可入职
+
+**个人标签**
+- MBTI：INFP
+- 出生年月：1995.05
+- 籍贯：广东潮安
+
+**求职亮点数据**
+- 小红书官号：0→2万粉，40+篇高转化笔记
+- 薯店：从0到月销3万+
+- 直播投放：单品单场GMV 100万
+
+**偏好/风格**
+- 喜欢简洁直接的沟通
+- 注重实操和数据
 
 ---
 
-The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.
+*Last updated: 2026-03-12*
