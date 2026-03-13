@@ -52,6 +52,14 @@
     "in-depth-research": {
       "version": "1.0.0",
       "installedAt": 1773374084664
+    },
+    "youtube-api-skill": {
+      "version": "1.0.3",
+      "installedAt": 1773380786372
+    },
+    "skill-creator": {
+      "version": "0.1.0",
+      "installedAt": 1773380824571
     }
   }
 }
