@@ -40,6 +40,18 @@
     "weather": {
       "version": "1.0.0",
       "installedAt": 1773128705015
+    },
+    "yoder-skill-auditor": {
+      "version": "3.1.0",
+      "installedAt": 1773373568060
+    },
+    "zero-trust": {
+      "version": "1.0.0",
+      "installedAt": 1773374027618
+    },
+    "in-depth-research": {
+      "version": "1.0.0",
+      "installedAt": 1773374084664
     }
   }
 }
