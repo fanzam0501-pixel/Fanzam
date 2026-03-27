@@ -1,0 +1,38 @@
+{
+  "gold_monitoring": {
+    "enabled": true,
+    "symbols": [
+      {
+        "code": "518880",
+        "name": "黄金ETF",
+        "source": "tencent",
+        "type": "ETF",
+        "note": "华安黄金ETF，跟踪上海金"
+      },
+      {
+        "code": "AU9999",
+        "name": "国内金价(AU9999/T+D)",
+        "source": "huilvbiao",
+        "type": "T+D",
+        "note": "汇率表数据，上海黄金交易所基准价格"
+      }
+    ],
+    "schedule": {
+      "daily_report": "08:00",
+      "analysis_interval": 30
+    },
+    "trend_detection": {
+      "window_size": 5,
+      "peak_threshold": 0.3,
+      "valley_threshold": 0.3,
+      "min_change_pct": 0.15
+    },
+    "alert_rules": {
+      "peak_to_decline": true,
+      "valley_to_rise": true,
+      "continuous_decline": false
+    },
+    "history_file": "/root/.openclaw/workspace/gold_price_history.json",
+    "state_file": "/root/.openclaw/workspace/gold_monitor_state.json"
+  }
+}
