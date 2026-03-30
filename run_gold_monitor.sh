@@ -19,7 +19,7 @@ if echo "$OUTPUT" | grep -q "\[HAS_ALERT\]"; then
     REPORT=$(echo "$OUTPUT" | grep -v "\[HAS_ALERT\]" | grep -v "\[NO_ALERT\]")
 
     # 发送飞书消息（使用绝对路径）
-    /root/.nvm/versions/node/v22.22.0/bin/openclaw message send --message "$REPORT"
+    /root/.nvm/versions/node/v22.22.0/bin/openclaw message send -t "user:ou_5041a81ad3a5316a4b6f360e560cdc3f" --message "$REPORT"
 
     echo "[$TIMESTAMP] 已发送金价提醒到飞书"
 else
