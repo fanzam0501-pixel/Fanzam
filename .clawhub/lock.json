@@ -60,6 +60,14 @@
     "skill-creator": {
       "version": "0.1.0",
       "installedAt": 1773380824571
+    },
+    "openclaw-boss": {
+      "version": "5.2.0",
+      "installedAt": 1775130904471
+    },
+    "coworker": {
+      "version": "1.0.0",
+      "installedAt": 1775130909535
     }
   }
 }

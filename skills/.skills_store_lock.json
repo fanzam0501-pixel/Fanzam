@@ -66,6 +66,18 @@
       "zip_url": "https://lightmake.site/api/v1/download?slug=skill-creator",
       "source": "skillhub",
       "version": "0.1.0"
+    },
+    "openclaw-boss": {
+      "name": "Openclaw Boss",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=openclaw-boss",
+      "source": "skillhub",
+      "version": "5.2.0"
+    },
+    "coworker": {
+      "name": "Hannah & Elena client skill for coworker integration by Sokosumi",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=coworker",
+      "source": "skillhub",
+      "version": "1.0.0"
     }
   }
 }
