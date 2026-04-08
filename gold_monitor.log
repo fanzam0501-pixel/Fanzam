@@ -499,3 +499,31 @@ Error: Channel is required when multiple channels are configured: feishu, wecom
 [2026-04-07 22:30:01] 无转折点信号，跳过发送
 [2026-04-07 23:00:01] 无转折点信号，跳过发送
 [2026-04-07 23:30:01] 无转折点信号，跳过发送
+[2026-04-08 08:00:01] 无转折点信号，跳过发送
+[plugins] plugins.allow is empty; discovered non-bundled plugins may auto-load: adp-openclaw (/root/.openclaw/extensions/adp-openclaw/index.ts), ddingtalk (/root/.openclaw/extensions/ddingtalk/index.ts), openclaw-plugin-yuanbao (/root/.openclaw/extensions/openclaw-plugin-yuanbao/dist/index.js), openclaw-qqbot (/root/.openclaw/extensions/openclaw-qqbot/index.ts), openclaw-weixin (/root/.openclaw/extensions/openclaw-weixin/index.ts), wecom (/root/.openclaw/extensions/wecom/index.ts). Set plugins.allow to explicit trusted ids.
+[plugins] feishu_doc: Registered feishu_doc, feishu_app_scopes
+[plugins] feishu_chat: Registered feishu_chat tool
+[plugins] feishu_wiki: Registered feishu_wiki tool
+[plugins] feishu_drive: Registered feishu_drive tool
+[plugins] feishu_bitable: Registered bitable tools
+[adp-openclaw] register() called - starting plugin registration
+[plugins] [adp-openclaw] Plugin register() called
+[adp-openclaw] Registering tool factory: adp_upload_file
+[plugins] [adp-openclaw] Registering tool factory: adp_upload_file
+[adp-openclaw] Tool adp_upload_file registered successfully
+[plugins] [adp-openclaw] Tool adp_upload_file registered successfully
+[adp-openclaw] Plugin registration complete
+[plugins] [adp-openclaw] Plugin registration complete
+Error: Channel is required when multiple channels are configured: feishu, wecom
+[2026-04-08 08:00:01] 已发送金价提醒到飞书
+[2026-04-08 08:30:01] 无转折点信号，跳过发送
+[2026-04-08 09:00:02] 无转折点信号，跳过发送
+[2026-04-08 09:30:02] 无转折点信号，跳过发送
+[2026-04-08 10:00:01] 无转折点信号，跳过发送
+[2026-04-08 10:30:01] 无转折点信号，跳过发送
+[2026-04-08 11:00:01] 无转折点信号，跳过发送
+[2026-04-08 11:30:02] 无转折点信号，跳过发送
+[2026-04-08 12:00:01] 无转折点信号，跳过发送
+[2026-04-08 12:30:01] 无转折点信号，跳过发送
+[2026-04-08 13:00:02] 无转折点信号，跳过发送
+[2026-04-08 13:30:01] 无转折点信号，跳过发送
